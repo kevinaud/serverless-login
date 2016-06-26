@@ -12,7 +12,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" [routerLink]="['Home']">Login App</a>
+        <a class="navbar-brand" [routerLink]="['/']">Serverless Login App</a>
 
         </div>
 
@@ -20,28 +20,35 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav navbar-right">
-              
-                <!--<li><a 
-                        [routerLink]="['Home']"
-                        [class.active]="router.isRouteActive(router.generate(['/Home']))"
-                        class="text-center">
-                    Home</a></li> -->
 
                 <li><a 
-                        [routerLink]="['Login']"
-                        [class.active]="router.isRouteActive(router.generate(['/Login']))"
+                        *ngIf="!isLoggedIn"
+                        [routerLink]="['/login']"
+                        [class.active]="false"
                         class="text-center">
                     Login</a></li>
 
                 <li><a 
-                        [routerLink]="['SignUp']"
-                        [class.active]="router.isRouteActive(router.generate(['/SignUp']))"
+                        *ngIf="!isLoggedIn"
+                        [routerLink]="['/sign-up']"
+                        [class.active]="false"
                         class="text-center">
                     Sign Up</a></li>
 
-                <li
-                    *ngIf="loggedIn">
-                    <a>Logout</a></li>
+                <li><a 
+                        *ngIf="isLoggedIn"
+                        [routerLink]="['/profile']"
+                        [class.active]="false"
+                        class="text-center">
+                    Profile</a></li>
+
+                <li><a
+                        *ngIf="isLoggedIn"
+                        [class.active]="false"
+                        href="/"
+                        class="text-center"
+                        (click)="userService.logout()">
+                    Logout</a></li>
                
             </ul>
             

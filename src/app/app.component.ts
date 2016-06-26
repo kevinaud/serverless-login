@@ -1,23 +1,10 @@
 import { Component } from '@angular/core';
 import { HTTP_PROVIDERS } from '@angular/http';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
-
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { NavbarComponent } from './navbar/navbar.component';
+import { UserService } from './user/user.service';
 
-@RouteConfig([
-
-    { path: '/', name: 'Home', component: HomeComponent, useAsDefault: true },
-    { path: '/login', name: 'Login', component: LoginComponent },
-    { path: '/sign-up', name: 'SignUp', component: SignUpComponent },
-    { path: '/profile', name: 'Profile', component: ProfileComponent },
-    { path: '/*other', name: 'Other', redirectTo: ['Home'] }
-
-])
 @Component({
     moduleId: module.id,
     selector: 'app-root',
@@ -31,9 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     ],
     providers: [
       HTTP_PROVIDERS,
-      ROUTER_PROVIDERS
+      UserService
     ]
 })
-export class AppComponent {
-    title = 'title';
-}
+export class AppComponent { }

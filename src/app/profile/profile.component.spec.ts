@@ -11,10 +11,11 @@ import {
 } from '@angular/core/testing';
 
 import { ProfileComponent } from './profile.component';
+import { UserService } from './../user/user.service';
 
 describe('Component: Profile', () => {
   it('should create an instance', () => {
-    let component = new ProfileComponent();
+    let component = new ProfileComponent(new UserService);
     expect(component).toBeTruthy();
   });
 });

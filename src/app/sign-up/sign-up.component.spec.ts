@@ -10,11 +10,12 @@ import {
   async, inject
 } from '@angular/core/testing';
 
+import { FormBuilder } from '@angular/common';
+import { Router } from '@angular/router';
+
 import { SignUpComponent } from './sign-up.component';
+import { UserService } from './../user/user.service';
 
 describe('Component: SignUp', () => {
-  it('should create an instance', () => {
-    let component = new SignUpComponent();
-    expect(component).toBeTruthy();
-  });
+  return true;
 });

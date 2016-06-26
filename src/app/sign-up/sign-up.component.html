@@ -1,9 +1,157 @@
+<div class="container-fluid">
+
 <div class="row">
 <div class="col-xs-12">
 
-    <h1 class="text-center">
-        Sign Up
-    </h1>
+    <h1 class="text-center signup-title">Sign Up</h1>
+    
+    <p class="text-center login-info">Already have an account? <a [routerLink]="['/login']">Login Here</a></p>
 
 </div>
+</div>
+
+<div class="row">
+<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+
+     <div 
+        *ngIf="error !== ''"
+        class="alert alert-danger">
+
+        {{ error }}
+
+    </div>
+
+    <div 
+        *ngIf="success !== ''"
+        class="alert alert-success">
+
+        {{ success }}
+
+    </div>
+
+</div>
+</div>
+
+<div class="row">
+<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+    
+        <div class="tab-area">
+            
+            <div [class.hidden]="activeTabIndex !== 0">
+            
+                <form [ngFormModel]="infoForm" (ngSubmit)="onSubmit()">
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        
+                        <input
+                            ngControl="email"
+                            #email="ngForm"
+                            [class.success-border]="email.touched && !email.errors"
+                            [class.danger-border]="email.touched && email.errors"
+                            class="form-control"
+                            id="email" 
+                            type="text">
+                        
+                        <div 
+                            *ngIf="email.touched && email.errors" 
+                            class="alert alert-danger">
+                            
+                            <div *ngIf="email.errors.required || email.errors.validEmailFormat">You must enter a valid email address</div>
+                        
+                        </div>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        
+                        <input
+                            ngControl="username"
+                            #username="ngForm"
+                            [class.success-border]="username.touched && !username.errors"
+                            [class.danger-border]="username.touched && username.errors"
+                            class="form-control"
+                            id="username" 
+                            type="text">
+                        
+                        <div 
+                            *ngIf="username.touched && username.errors" 
+                            class="alert alert-danger">
+                            
+                            <div *ngIf="username.errors.required">You must enter a username</div>
+                        
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="username">Password</label>
+                        
+                        <input
+                            ngControl="password"
+                            #password="ngForm"
+                            [class.success-border]="password.touched && !password.errors"
+                            [class.danger-border]="password.touched && password.errors"
+                            class="form-control"
+                            id="password" 
+                            type="password">
+                        
+                        <div *ngIf="password.touched && password.errors" class="alert alert-danger">
+                            
+                            <div *ngIf="password.errors.required">You must enter a password</div>
+                            
+                            <div *ngIf="password.errors.minLength">Password must be at least {{ password.errors.minLength }} characters long</div>
+                            
+                            <div *ngIf="password.errors.noNum">Password must contain at least one number</div>
+                            
+                            <div *ngIf="password.errors.noLower">Password must contain at least on lower case character</div>
+                            
+                            <div *ngIf="password.errors.noUpper">Password must contain at least on upper case character</div>
+                        
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        
+                        <input
+                            ngControl="confirmPassword"
+                            #confirmPassword="ngForm"
+                            [class.success-border]="confirmPassword.touched && !confirmPassword.errors && !infoForm.errors"
+                            class="form-control"
+                            id="confirmPassword" 
+                            type="password">
+                        
+                        <div 
+                            *ngIf="confirmPassword.touched && infoForm.errors" 
+                            class="alert alert-danger">
+                            
+                            <div *ngIf="confirmPassword.errors && confirmPassword.errors.required">You must confirm your password</div>
+                            
+                            <div *ngIf="infoForm.errors.passwordsShouldMatch">Passwords do not match</div>
+                        
+                        </div>
+                    </div>
+                
+                </form>
+            
+            </div>
+        
+</div>
+</div>
+
+<div class="row">
+<div class="menu-controls col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+ 
+    <button
+        [class.hidden]="!tabs[activeTabIndex] === tabs[0]"
+        [class.disabled]="!tabs[0].valid"
+        [class.btn-success]="tabs[0].valid"
+        [class.btn-primary]="!tabs[0].valid"
+        type="submit"
+        (click)="onSubmit()"
+        class="btn pull-right">Submit</button>
+
+</div>
+</div>
+
 </div>

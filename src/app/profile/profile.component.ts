@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Profile } from './profile';
+import { UserService } from './../user/user.service';
 
 @Component({
     moduleId: module.id,
@@ -11,16 +12,19 @@ import { Profile } from './profile';
 export class ProfileComponent implements OnInit {
 
     profile: Profile;
+    userService: UserService;
 
-    constructor() {}
+    constructor(userService: UserService) {
+        this.userService = userService;
+    }
 
     ngOnInit() {
 
-        this.profile = {
-            username: "kevinaud",
-            email: "kevinaud@gmail.com",
-            dateOfBirth: "March 4, 1996"
-        }
+        this.profile = this.userService.getCurrentUser();
+
+        this.userService.currentUserStream().subscribe(profile => {
+            this.profile = profile;
+        });
 
     }
 
